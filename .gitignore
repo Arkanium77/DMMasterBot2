@@ -1,35 +1,142 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
+######################
+# Project Specific
+######################
+**/target/**
+**/target/generated-sources/**
 
-.DS_Store
-build
-.gradle
-dist/
-out
-log
-**/META-INF/*
+######################
+# Node
+######################
+/node/
+/node_tmp/
+/node_modules/
+/npm-debug.log.*
+/.awcache/*
+/.cache-loader/*
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-*.swp
+######################
+# SASS
+######################
+.sass-cache/
 
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-nbdist/
-.nb-gradle/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
+######################
+# Eclipse
+######################
+*.pydevproject
 .project
-.settings
-.springBeans
+.metadata
+tmp/
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.factorypath
+/src/main/resources/rebel.xml
 
-### Generated sources ###
-src/**/schema
+# External tool builders
+.externalToolBuilders/**
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+######################
+# Intellij
+######################
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+classes/
+out/
+
+######################
+# Visual Studio Code
+######################
+.vscode/
+
+######################
+# Maven
+######################
+/log/
+/target/
+
+######################
+# Gradle
+######################
+.gradle/
+/build/
+
+######################
+# Package Files
+######################
+*.jar
+*.war
+*.ear
+*.db
+
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+######################
+# Mac OSX
+######################
+.DS_Store
+.svn
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+######################
+# Directories
+######################
+/bin/
+
+######################
+# Logs
+######################
+*.log*
+
+######################
+# Others
+######################
+*.class
+*.*~
+*~
+.merge_file*
+
+######################
+# Gradle Wrapper
+######################
+!gradle/wrapper/gradle-wrapper.jar
+
+######################
+# Maven Wrapper
+######################
+!.mvn/wrapper/maven-wrapper.jar
+/**/.mvn/
+
+/automatic_backup
+/**/automatic_backup
