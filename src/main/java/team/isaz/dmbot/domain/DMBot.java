@@ -13,7 +13,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import team.isaz.dmbot.configuration.BotConfig;
 import team.isaz.dmbot.domain.common.exception.NoNeedResponseException;
-import team.isaz.dmbot.domain.common.service.CommandSwitchService;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DMBot extends TelegramLongPollingBot {
     private final BotConfig config;
-    private final CommandSwitchService switchService;
+    private final CommandSwitch switchService;
 
     @Override
     public String getBotUsername() {
@@ -65,7 +64,7 @@ public class DMBot extends TelegramLongPollingBot {
                 log.error("Trying to send message of unknown type ({})", response.getClass().getSimpleName());
             }
         } catch (TelegramApiException e) {
-            log.error("Failed to send message due to error: ", e);
+            log.error("Failed to send message due to error: {}", e.getMessage(), e);
         } catch (NoNeedResponseException ignored) {
         }
     }

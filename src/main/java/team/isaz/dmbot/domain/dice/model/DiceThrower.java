@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 @Getter
 @AllArgsConstructor
-public class ThrowRequest {
+public class DiceThrower {
     private final int count;
     private final DiceTypeEnum type;
     private final Supplier<Integer> diceRoller;
@@ -58,8 +58,8 @@ public class ThrowRequest {
             return this;
         }
 
-        public ThrowRequest build() {
-            return new ThrowRequest(count, type, diceRoller, modifier);
+        public DiceThrower build() {
+            return new DiceThrower(count, type, diceRoller, modifier);
         }
     }
 }
