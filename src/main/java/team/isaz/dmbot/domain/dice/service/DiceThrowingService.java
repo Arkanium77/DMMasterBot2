@@ -54,11 +54,10 @@ public class DiceThrowingService {
         StringBuilder builder = new StringBuilder(userName).append(" throws:\n");
 
         String result = Arrays.stream(throwResult)
-                .sorted()
                 .mapToObj(i -> stringValue(i, request.getType()))
                 .collect(Collectors.joining(" | "));
 
-        builder.append(result).append("\n");
+        builder.append("|").append(result).append("|").append("\n");
         if (!DiceTypeEnum.COIN.equals(request.getType())) {
             if (request.getModifier() != 0) {
                 builder.append("Score modifier: ").append(request.getModifier() > 0 ? "+" : "")
