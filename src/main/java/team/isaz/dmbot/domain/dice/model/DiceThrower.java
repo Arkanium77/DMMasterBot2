@@ -3,15 +3,18 @@ package team.isaz.dmbot.domain.dice.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.With;
 import team.isaz.dmbot.domain.common.utils.DataUtils;
 
 import java.util.function.Supplier;
 
+@With
 @Getter
 @AllArgsConstructor
 public class DiceThrower {
     private final int count;
     private final DiceTypeEnum type;
+    private final String name;
     private final Supplier<Integer> diceRoller;
     private final int modifier;
 
@@ -23,6 +26,7 @@ public class DiceThrower {
     public static class ThrowRequestBuilder {
         private int count;
         private DiceTypeEnum type;
+        private String name;
         private Supplier<Integer> diceRoller;
         private int modifier;
 
@@ -39,6 +43,11 @@ public class DiceThrower {
 
         public ThrowRequestBuilder type(DiceTypeEnum type) {
             this.type = type;
+            return this;
+        }
+
+        public ThrowRequestBuilder name(String name) {
+            this.name = name;
             return this;
         }
 
@@ -59,7 +68,7 @@ public class DiceThrower {
         }
 
         public DiceThrower build() {
-            return new DiceThrower(count, type, diceRoller, modifier);
+            return new DiceThrower(count, type, name, diceRoller, modifier);
         }
     }
 }

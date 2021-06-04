@@ -11,13 +11,25 @@ public class RegexRepository {
 
     private final static String argsRegex = "( \\S{1,})*";
     private final Pattern diceThrowingPattern =
-            regex("(|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100)($|[+-][1-9][0-9]*)");
+            regex("(|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100)(|[+-][1-9][0-9]*)");
     private final Pattern commandThrowPattern = command("/throw", false);
     private final Pattern commandFlipPattern = command("/flip", false);
     private final Pattern commandRoflPattern = command("/rofl", false);
+    private final Pattern multiDiceThrowingPattern1 =
+            regex("^((|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100)(|[+-][1-9][0-9]*) )*((|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100)(|[+-][1-9][0-9]*))$");
+    private final Pattern multiDiceThrowingPattern2 =
+            regex("((|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100) ){1,}(|[+-][1-9][0-9]*)");
 
     public Predicate<String> diceThrowing() {
         return diceThrowingPattern.asMatchPredicate();
+    }
+
+    public Predicate<String> multiDiceThrowing1() {
+        return multiDiceThrowingPattern1.asMatchPredicate();
+    }
+
+    public Predicate<String> multiDiceThrowing2() {
+        return multiDiceThrowingPattern2.asMatchPredicate();
     }
 
     public Predicate<String> commandThrow() {

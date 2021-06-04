@@ -24,6 +24,10 @@ public class CommandSwitch {
             responseMessage.addAll(parseCommandMessage(message));
         } else if (regexRepository.diceThrowing().test(message.getText())) {
             responseMessage.add(diceModule.throwDice(message));
+        } else if (regexRepository.multiDiceThrowing1().test(message.getText())) {
+            responseMessage.add(diceModule.multiDiceThrowing1(message));
+        } else if (regexRepository.multiDiceThrowing2().test(message.getText())) {
+            responseMessage.add(diceModule.multiDiceThrowing2(message));
         }
         return responseMessage;
     }
