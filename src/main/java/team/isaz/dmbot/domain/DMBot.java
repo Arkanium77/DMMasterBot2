@@ -48,18 +48,15 @@ public class DMBot extends TelegramLongPollingBot {
 
     private void executeForTrueType(PartialBotApiMethod<Message> response) {
         try {
-            if (response instanceof SendMessage) {
-                var t = (SendMessage) response;
+            if (response instanceof SendMessage t) {
                 execute(t);
-                log.debug("Sent message \"{}\"", t.toString());
-            } else if (response instanceof SendSticker) {
-                var t = (SendSticker) response;
+                log.debug("Sent message \"{}\"", t);
+            } else if (response instanceof SendSticker t) {
                 execute(t);
-                log.debug("Sent sticker \"{}\"", t.toString());
-            } else if (response instanceof SendPhoto) {
-                var t = (SendPhoto) response;
+                log.debug("Sent sticker \"{}\"", t);
+            } else if (response instanceof SendPhoto t) {
                 execute(t);
-                log.debug("Sent photo \"{}\" to {}", t.toString(), t.getChatId());
+                log.debug("Sent photo \"{}\" to {}", t, t.getChatId());
             } else {
                 log.error("Trying to send message of unknown type ({})", response.getClass().getSimpleName());
             }
