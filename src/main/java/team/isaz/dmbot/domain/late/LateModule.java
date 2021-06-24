@@ -6,28 +6,30 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import team.isaz.dmbot.domain.common.exception.NoNeedResponseException;
+import team.isaz.dmbot.domain.common.model.Random;
 import team.isaz.dmbot.domain.common.repository.StringBasedRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.SplittableRandom;
 
 @Component
 @RequiredArgsConstructor
 public class LateModule {
-    private final SplittableRandom random;
+    private final Random random;
     @Qualifier("lateBase")
     private final StringBasedRepository repository;
 
     public PartialBotApiMethod<Message> late(Message message) {
         String chatId = String.valueOf(message.getChatId());
         List<String> values = new ArrayList<>();
-        String text = repository.find(chatId);
+        String text = repository.find(chatId)
+                .orElseThrow(NoNeedResponseException::new);
         values.add(minuteMessage());
-        if (chanceOf(3)) {
+        if (random.chanceOf(3)) {
             values.add(hourMessage());
-            if (chanceOf(5)) {
+            if (random.chanceOf(5)) {
                 values.add(dayMessage());
             }
         }
@@ -50,11 +52,6 @@ public class LateModule {
 
         message.append(values.get(values.size() - 1));
         return message.toString();
-    }
-
-    private boolean chanceOf(int i) {
-        int c = random.nextInt(i);
-        return c == 0;
     }
 
     private int genMinutes() {

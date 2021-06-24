@@ -42,4 +42,8 @@ public class StickerRepository {
     public String getCoin(int num) {
         return coin[num];
     }
+
+    public String getManul() {
+        return manul;
+    }
 }

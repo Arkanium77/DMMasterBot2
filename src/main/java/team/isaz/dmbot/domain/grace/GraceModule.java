@@ -1,4 +1,4 @@
-package team.isaz.dmbot.domain.rofl;
+package team.isaz.dmbot.domain.grace;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,15 +7,17 @@ import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import team.isaz.dmbot.domain.common.exception.NoNeedResponseException;
+import team.isaz.dmbot.domain.common.model.Random;
 import team.isaz.dmbot.domain.common.repository.StringBasedRepository;
 
 @Component
 @RequiredArgsConstructor
-public class RoflModule {
-    @Qualifier("roflBase")
+public class GraceModule {
+    private final Random random;
+    @Qualifier("graceBase")
     private final StringBasedRepository repository;
 
-    public PartialBotApiMethod<Message> rofl(Message message) {
+    public PartialBotApiMethod<Message> grace(Message message) {
         String chatId = String.valueOf(message.getChatId());
         String text = repository.find(chatId)
                 .orElseThrow(NoNeedResponseException::new);
@@ -25,4 +27,6 @@ public class RoflModule {
                 .text(text)
                 .build();
     }
+
+
 }

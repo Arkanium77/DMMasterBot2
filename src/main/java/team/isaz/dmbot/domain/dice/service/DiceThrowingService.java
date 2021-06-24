@@ -3,18 +3,18 @@ package team.isaz.dmbot.domain.dice.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import team.isaz.dmbot.domain.common.model.Random;
 import team.isaz.dmbot.domain.common.utils.DataUtils;
 import team.isaz.dmbot.domain.dice.model.DiceThrower;
 import team.isaz.dmbot.domain.dice.model.DiceTypeEnum;
 
-import java.util.SplittableRandom;
 import java.util.function.Supplier;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class DiceThrowingService {
-    private final SplittableRandom random;
+    private final Random random;
 
     public static int getAdvantage(int d1, int d2, int modifier) {
         int max = d1;
