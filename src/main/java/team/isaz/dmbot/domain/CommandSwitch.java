@@ -6,6 +6,7 @@ import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import team.isaz.dmbot.domain.common.repository.RegexRepository;
 import team.isaz.dmbot.domain.dice.DiceModule;
+import team.isaz.dmbot.domain.late.LateModule;
 import team.isaz.dmbot.domain.rofl.RoflModule;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class CommandSwitch {
     private final RegexRepository regexRepository;
     private final DiceModule diceModule;
     private final RoflModule roflModule;
+    private final LateModule lateModule;
 
     public List<PartialBotApiMethod<Message>> fetchResponse(Message message) {
         List<PartialBotApiMethod<Message>> responseMessage = new ArrayList<>();
@@ -28,6 +30,8 @@ public class CommandSwitch {
             responseMessage.add(diceModule.multiDiceThrowing1(message));
         } else if (regexRepository.multiDiceThrowing2().test(message.getText())) {
             responseMessage.add(diceModule.multiDiceThrowing2(message));
+        } else if (regexRepository.late().test(message.getText())) {
+            responseMessage.add(lateModule.late(message));
         }
         return responseMessage;
     }
@@ -40,6 +44,8 @@ public class CommandSwitch {
             responseMessage.add(diceModule.flipCoin(message));
         } else if (regexRepository.commandRofl().test(message.getText())) {
             responseMessage.add(roflModule.rofl(message));
+        } else if (regexRepository.commandLate().test(message.getText())) {
+            responseMessage.add(lateModule.late(message));
         }
         return responseMessage;
     }

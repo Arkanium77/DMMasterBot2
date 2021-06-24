@@ -15,10 +15,12 @@ public class RegexRepository {
     private final Pattern commandThrowPattern = command("/throw", false);
     private final Pattern commandFlipPattern = command("/flip", false);
     private final Pattern commandRoflPattern = command("/rofl", false);
+    private final Pattern commandLatePattern = command("/late", false);
     private final Pattern multiDiceThrowingPattern1 =
             regex("^((|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100)(|[+-][1-9][0-9]*) )*((|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100)(|[+-][1-9][0-9]*))$");
     private final Pattern multiDiceThrowingPattern2 =
             regex("((|[1-9][0-9]*)d(2|C|c|3|F|4|6|8|10|12|20|D|d|100) ){1,}(|[+-][1-9][0-9]*)");
+    private final Pattern latePattern = regex(".*(опазд|опозд|задержу|задержим).*");
 
     public Predicate<String> diceThrowing() {
         return diceThrowingPattern.asMatchPredicate();
@@ -32,6 +34,10 @@ public class RegexRepository {
         return multiDiceThrowingPattern2.asMatchPredicate();
     }
 
+    public Predicate<String> late() {
+        return null;
+    }
+
     public Predicate<String> commandThrow() {
         return commandThrowPattern.asMatchPredicate();
     }
@@ -42,6 +48,10 @@ public class RegexRepository {
 
     public Predicate<String> commandRofl() {
         return commandRoflPattern.asMatchPredicate();
+    }
+
+    public Predicate<String> commandLate() {
+        return commandLatePattern.asMatchPredicate();
     }
 
     private Pattern regex(String regex) {
