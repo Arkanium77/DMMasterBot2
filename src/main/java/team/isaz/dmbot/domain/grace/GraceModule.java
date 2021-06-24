@@ -7,13 +7,11 @@ import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import team.isaz.dmbot.domain.common.exception.NoNeedResponseException;
-import team.isaz.dmbot.domain.common.model.Random;
 import team.isaz.dmbot.domain.common.repository.StringBasedRepository;
 
 @Component
 @RequiredArgsConstructor
 public class GraceModule {
-    private final Random random;
     @Qualifier("graceBase")
     private final StringBasedRepository repository;
 
