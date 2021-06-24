@@ -35,7 +35,7 @@ public class RegexRepository {
     }
 
     public Predicate<String> late() {
-        return null;
+        return latePattern.asMatchPredicate();
     }
 
     public Predicate<String> commandThrow() {

@@ -71,8 +71,8 @@ public class LateModule {
 
     private String minuteMessage() {
         int c = genMinutes();
-        StringBuilder s = new StringBuilder().append(c)
-                .append(" мин");
+        StringBuilder s = new StringBuilder()
+                .append(c).append(" мин");
         if (c > 20) {
             c %= 10;
         } else {
@@ -91,7 +91,8 @@ public class LateModule {
 
     private String hourMessage() {
         int c = genHours();
-        StringBuilder s = new StringBuilder().append(c).append(" час");
+        StringBuilder s = new StringBuilder()
+                .append(c).append(" час");
         if (c > 20) {
             c %= 10;
         } else {
@@ -109,7 +110,8 @@ public class LateModule {
 
     private String dayMessage() {
         int c = genDays();
-        StringBuilder s = new StringBuilder().append(c).append(" ");
+        StringBuilder s = new StringBuilder()
+                .append(c).append(" ");
         if (c > 20) {
             c %= 10;
         } else {
