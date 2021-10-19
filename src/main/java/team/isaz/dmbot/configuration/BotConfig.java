@@ -16,4 +16,5 @@ public class BotConfig {
     private String name;
     @NotNull
     private String token;
+    private String path;
 }

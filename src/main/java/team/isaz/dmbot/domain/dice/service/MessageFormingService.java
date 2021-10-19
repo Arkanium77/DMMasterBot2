@@ -77,7 +77,7 @@ public class MessageFormingService {
                 .mapToObj(i -> stringValue(i, request.getType()))
                 .collect(Collectors.joining(" | "));
 
-        builder.append("|").append(result).append("|").append("\n");
+        builder.append("| ").append(result).append(" |").append("\n");
         if (!DiceTypeEnum.COIN.equals(request.getType())) {
             if (request.getModifier() != 0) {
                 builder.append("Score modifier: ").append(request.getModifier() > 0 ? "+" : "")

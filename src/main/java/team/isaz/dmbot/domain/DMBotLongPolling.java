@@ -2,7 +2,6 @@ package team.isaz.dmbot.domain;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,9 +16,9 @@ import team.isaz.dmbot.domain.common.exception.NoNeedResponseException;
 import java.util.List;
 
 @Slf4j
-@Service
+//@Service
 @RequiredArgsConstructor
-public class DMBot extends TelegramLongPollingBot {
+public class DMBotLongPolling extends TelegramLongPollingBot {
     private final BotConfig config;
     private final CommandSwitch switchService;
 
