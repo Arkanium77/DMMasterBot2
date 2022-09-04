@@ -2,6 +2,8 @@ package team.isaz.dmbot.domain;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -16,8 +18,9 @@ import team.isaz.dmbot.domain.common.exception.NoNeedResponseException;
 import java.util.List;
 
 @Slf4j
-//@Service
+@Service
 @RequiredArgsConstructor
+@ConditionalOnExpression(value = "!${bot.use_webhook}")
 public class DMBotLongPolling extends TelegramLongPollingBot {
     private final BotConfig config;
     private final CommandSwitch switchService;
@@ -31,7 +34,6 @@ public class DMBotLongPolling extends TelegramLongPollingBot {
     public String getBotToken() {
         return config.getToken();
     }
-
 
     @Override
     public void onUpdateReceived(Update update) {

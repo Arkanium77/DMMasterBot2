@@ -2,6 +2,7 @@ package team.isaz.dmbot.domain;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -20,6 +21,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@ConditionalOnExpression(value = "${bot.use_webhook}")
 public class DMBotWebhook extends TelegramWebhookBot {
     private final BotConfig config;
     private final CommandSwitch switchService;

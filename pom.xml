@@ -16,7 +16,7 @@
     <description>Java rework of DmMaster Bot</description>
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <start>team.isaz.dmbot.DmbotApplication</start>
     </properties>
 
@@ -41,9 +41,9 @@
         </dependency>
         <!-- TBot -->
         <dependency>
-            <groupId>com.github.xabgesagtx</groupId>
-            <artifactId>telegram-spring-boot-starter</artifactId>
-            <version>0.24</version>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-spring-boot-starter</artifactId>
+            <version>6.1.0</version>
         </dependency>
     </dependencies>
 
@@ -69,7 +69,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
         </plugins>

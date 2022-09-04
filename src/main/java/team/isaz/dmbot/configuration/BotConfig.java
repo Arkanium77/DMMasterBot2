@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 @ConfigurationProperties(prefix = "bot")
 public class BotConfig {
     @NotNull
+    private boolean useWebhook;
+    @NotNull
     private String name;
     @NotNull
     private String token;
