@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import team.isaz.dmbot.domain.common.model.Random;
 import team.isaz.dmbot.domain.common.repository.StringBasedRepository;
+import team.isaz.dmbot.domain.gaston.config.GastonModuleConfig;
 import team.isaz.dmbot.domain.grace.config.GraceModuleConfig;
 import team.isaz.dmbot.domain.late.config.LateModuleConfig;
 import team.isaz.dmbot.domain.rofl.config.RoflModuleConfig;
@@ -24,5 +25,15 @@ public class BeanConfig {
     @Bean
     public StringBasedRepository graceBase(GraceModuleConfig base, Random random) {
         return new StringBasedRepository(base.get(), random, 2);
+    }
+
+    @Bean
+    public StringBasedRepository gastonFirstBase(GastonModuleConfig base, Random random) {
+        return new StringBasedRepository(base.getFirst(), random, 2);
+    }
+
+    @Bean
+    public StringBasedRepository gastonSecondBase(GastonModuleConfig base, Random random) {
+        return new StringBasedRepository(base.getSecond(), random, 2);
     }
 }

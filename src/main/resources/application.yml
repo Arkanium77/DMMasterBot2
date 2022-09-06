@@ -6,9 +6,9 @@ spring:
 bot:
   api-url: https://api.telegram.org/
   use-webhook: ${BOT_USE_WEBHOOK}
-  name: ${BOT_NAME}
-  token: ${BOT_TOKEN}
-  path: ${BOT_PATH}
+  name: ${DMBOT_NAME}
+  token: ${DMBOT_TOKEN}
+  path: ${DMBOT_PATH}
 
 management:
   info:

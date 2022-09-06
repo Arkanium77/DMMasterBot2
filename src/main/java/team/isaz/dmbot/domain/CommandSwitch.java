@@ -5,8 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import team.isaz.dmbot.configuration.BotConfig;
 import team.isaz.dmbot.domain.common.repository.RegexRepository;
 import team.isaz.dmbot.domain.dice.DiceModule;
+import team.isaz.dmbot.domain.gaston.GastonModule;
 import team.isaz.dmbot.domain.grace.GraceModule;
 import team.isaz.dmbot.domain.late.LateModule;
 import team.isaz.dmbot.domain.rofl.RoflModule;
@@ -20,12 +22,14 @@ import java.util.Locale;
 @Component
 @RequiredArgsConstructor
 public class CommandSwitch {
+    private final BotConfig botConfig;
     private final RegexRepository regexRepository;
     private final DiceModule diceModule;
     private final RoflModule roflModule;
     private final LateModule lateModule;
     private final TalkModule talkModule;
     private final GraceModule graceModule;
+    private final GastonModule gastonModule;
 
     public List<PartialBotApiMethod<Message>> fetchResponse(Message message) {
         List<PartialBotApiMethod<Message>> responseMessage = new ArrayList<>();
@@ -48,7 +52,8 @@ public class CommandSwitch {
     }
 
     private String fetchRouteString(String text) {
-        return text.toLowerCase(Locale.ROOT).replace("\n", " ");
+        return text == null || text.trim().isBlank() ? ""
+                : text.toLowerCase(Locale.ROOT).replace("\n", " ");
     }
 
     private List<PartialBotApiMethod<Message>> parseTalk(Message message, String route) {
@@ -61,6 +66,10 @@ public class CommandSwitch {
             responseMessage.add(talkModule.coin(message));
         } else if (regexRepository.grace().test(route)) {
             responseMessage.add(graceModule.grace(message));
+        } else if (!isReplyToMe(message) && regexRepository.gastonFirst().test(route)) {
+            responseMessage.add(gastonModule.gastonFirst(message));
+        } else if (isReplyToMe(message) && regexRepository.gastonSecond().test(route)) {
+            responseMessage.add(gastonModule.gastonSecond(message));
         }
         return responseMessage;
     }
@@ -77,6 +86,13 @@ public class CommandSwitch {
             responseMessage.add(lateModule.late(message));
         }
         return responseMessage;
+    }
+
+    private boolean isReplyToMe(Message message) {
+        if (!message.isReply()) {
+            return false;
+        }
+        return message.getReplyToMessage().getFrom().getUserName().equals(botConfig.getName());
     }
 
 }

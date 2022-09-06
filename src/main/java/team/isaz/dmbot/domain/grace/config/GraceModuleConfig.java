@@ -8,7 +8,7 @@ import java.util.List;
 
 @Configuration
 public class GraceModuleConfig {
-    List<String> base = Arrays.asList(
+    private final List<String> base = Arrays.asList(
             "Я тоже присоединяюсь к поздравлениям!",
             "Грац",
             "Вау! Круто! Поздравляю!",

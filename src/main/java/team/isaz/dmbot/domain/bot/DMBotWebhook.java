@@ -1,10 +1,11 @@
-package team.isaz.dmbot.domain;
+package team.isaz.dmbot.domain.bot;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.bots.TelegramWebhookBot;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -13,6 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import team.isaz.dmbot.configuration.BotConfig;
+import team.isaz.dmbot.domain.CommandSwitch;
 import team.isaz.dmbot.domain.common.exception.NoNeedResponseException;
 
 import java.util.List;
@@ -20,8 +22,8 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@ConditionalOnExpression(value = "!${bot.use_webhook}")
-public class DMBotLongPolling extends TelegramLongPollingBot {
+@ConditionalOnExpression(value = "${bot.use_webhook}")
+public class DMBotWebhook extends TelegramWebhookBot {
     private final BotConfig config;
     private final CommandSwitch switchService;
 
@@ -36,15 +38,24 @@ public class DMBotLongPolling extends TelegramLongPollingBot {
     }
 
     @Override
-    public void onUpdateReceived(Update update) {
-        if (update.hasMessage() && !update.getMessage().isReply()) {
+    public String getBotPath() {
+        return config.getPath();
+    }
+
+    @Override
+    public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
+        if (update.hasMessage() && isNotMyOwnMessage(update.getMessage())) {
             try {
                 List<PartialBotApiMethod<Message>> response = switchService.fetchResponse(update.getMessage());
                 response.forEach(this::executeForTrueType);
             } catch (NoNeedResponseException ignored) {
             }
         }
+        return null;
+    }
 
+    private boolean isNotMyOwnMessage(Message message) {
+        return !config.getName().equals(message.getFrom().getUserName());
     }
 
     private void executeForTrueType(PartialBotApiMethod<Message> response) {

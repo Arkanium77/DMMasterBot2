@@ -8,7 +8,7 @@ import java.util.List;
 
 @Configuration
 public class LateModuleConfig {
-    List<String> base = Arrays.asList(
+    private final List<String> base = Arrays.asList(
             "Будет через",
             "Опоздает на",
             "Задержится на",

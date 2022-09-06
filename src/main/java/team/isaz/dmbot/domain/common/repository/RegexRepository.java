@@ -29,6 +29,8 @@ public class RegexRepository {
     private final Pattern warPattern = regex(".*(ужасы войны|ужасывойны).*");
     private final Pattern coinPattern = regex(".*(монет|coin|золот|серебрян|медн).*");
     private final Pattern gracePattern = regex(".*(поздрав|грац|молодцы|молодец|молодцо).*");
+    private final Pattern gastonFirstPattern = regex(".*(гастон|gaston).*");
+    private final Pattern gastonSecondPattern = regex(".*(я.*не.*даром.*являюсь.*для.*всех.*примером|z.*yt.*lfhjv.*zdkz.cm.*lkz.*dct\\[.*ghbvthjv).*");
 
     public Predicate<String> diceThrowing() {
         return diceThrowingPattern.asMatchPredicate();
@@ -60,6 +62,14 @@ public class RegexRepository {
 
     public Predicate<String> grace() {
         return gracePattern.asMatchPredicate();
+    }
+
+    public Predicate<String> gastonFirst() {
+        return gastonFirstPattern.asMatchPredicate();
+    }
+
+    public Predicate<String> gastonSecond() {
+        return gastonSecondPattern.asMatchPredicate();
     }
 
     public Predicate<String> commandThrow() {

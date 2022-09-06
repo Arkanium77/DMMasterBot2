@@ -9,7 +9,7 @@ import java.util.List;
 @Configuration
 public class RoflModuleConfig {
 
-    List<String> base = Arrays.asList(
+    private final List<String> base = Arrays.asList(
             """
                     Проснулись эльфы, и увидели звезды, ибо лежали на спине, и полюбили звезды и ночь.
                     Проснулись люди, и увидели восходящее солнце, ибо лежали на боку, и полюбили солнце и день.
