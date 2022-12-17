@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import team.isaz.dmbot.configuration.BotConfig;
 import team.isaz.dmbot.domain.common.repository.RegexRepository;
 import team.isaz.dmbot.domain.dice.DiceModule;
+import team.isaz.dmbot.domain.excuse.ExcuseModule;
 import team.isaz.dmbot.domain.gaston.GastonModule;
 import team.isaz.dmbot.domain.grace.GraceModule;
 import team.isaz.dmbot.domain.late.LateModule;
@@ -29,6 +30,7 @@ public class CommandSwitch {
     private final LateModule lateModule;
     private final TalkModule talkModule;
     private final GraceModule graceModule;
+    private final ExcuseModule excuseModule;
     private final GastonModule gastonModule;
 
     public List<PartialBotApiMethod<Message>> fetchResponse(Message message) {
@@ -84,6 +86,8 @@ public class CommandSwitch {
             responseMessage.add(roflModule.rofl(message));
         } else if (regexRepository.commandLate().test(route)) {
             responseMessage.add(lateModule.late(message));
+        } else if (regexRepository.commandExcuse().test(route)) {
+            responseMessage.add(excuseModule.excuse(message));
         }
         return responseMessage;
     }

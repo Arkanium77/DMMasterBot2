@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import team.isaz.dmbot.domain.common.model.Random;
 import team.isaz.dmbot.domain.common.repository.StringBasedRepository;
+import team.isaz.dmbot.domain.excuse.config.ExcuseModuleConfig;
 import team.isaz.dmbot.domain.gaston.config.GastonModuleConfig;
 import team.isaz.dmbot.domain.grace.config.GraceModuleConfig;
 import team.isaz.dmbot.domain.late.config.LateModuleConfig;
@@ -35,5 +36,25 @@ public class BeanConfig {
     @Bean
     public StringBasedRepository gastonSecondBase(GastonModuleConfig base, Random random) {
         return new StringBasedRepository(base.getSecond(), random, 2);
+    }
+
+    @Bean
+    public StringBasedRepository excuseStartBase(ExcuseModuleConfig base, Random random) {
+        return new StringBasedRepository(base.getStart(), random, 0);
+    }
+
+    @Bean
+    public StringBasedRepository excuseReasonBase(ExcuseModuleConfig base, Random random) {
+        return new StringBasedRepository(base.getReason(), random, 0);
+    }
+
+    @Bean
+    public StringBasedRepository excuseAdditionBase(ExcuseModuleConfig base, Random random) {
+        return new StringBasedRepository(base.getAddition(), random, 0);
+    }
+
+    @Bean
+    public StringBasedRepository excuseEndBase(ExcuseModuleConfig base, Random random) {
+        return new StringBasedRepository(base.getEnd(), random, 0);
     }
 }

@@ -20,6 +20,7 @@ public class RegexRepository {
     private final Pattern commandFlipPattern = command("/flip", false);
     private final Pattern commandRoflPattern = command("/rofl", false);
     private final Pattern commandLatePattern = command("/late", false);
+    private final Pattern commandExcusePattern = command("/excuse", false);
     private final Pattern multiDiceThrowingPattern1 =
             regex("^((|[1-9][0-9]*)d(2|c|3|f|4|6|8|10|12|20|d|100)(|[+-][1-9][0-9]*) )*((|[1-9][0-9]*)d(2|c|3|f|4|6|8|10|12|20|d|100)(|[+-][1-9][0-9]*))$");
     private final Pattern multiDiceThrowingPattern2 =
@@ -46,6 +47,10 @@ public class RegexRepository {
 
     public Predicate<String> late() {
         return latePattern.asMatchPredicate();
+    }
+
+    public Predicate<String> excuse() {
+        return commandExcusePattern.asMatchPredicate();
     }
 
     public Predicate<String> manul() {
@@ -86,6 +91,9 @@ public class RegexRepository {
 
     public Predicate<String> commandLate() {
         return commandLatePattern.asMatchPredicate();
+    }
+    public Predicate<String> commandExcuse() {
+        return commandExcusePattern.asMatchPredicate();
     }
 
     @SuppressWarnings("MagicConstant")
